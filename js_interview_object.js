@@ -77,3 +77,89 @@ console.log(userOne);//fullName function added
 //Q7: Explain the this keyword in object methods
 /* this keyword refers to current object. Check Q6.answer. this keyword refers to UserOne object and this.firstname
 gets the fristName of userOne object. */
+
+
+//Q8. What is object destructuring? Show an example
+//destructing is to unpack object properties into variables.
+let {name:fullName, age, salary} = user;
+console.log(fullName);//employeeOne
+console.log(age);//30
+console.log(salary);//45000
+
+//Q9. How can you copy an object in JavaScript? Explain shallow copy vs deep copy.
+//copying object can be done through spread operator
+let copyUser = {...user};
+copyUser.age =67;
+console.log(copyUser);
+console.log(user);
+//above shallowcopy works fine for objects does not have any nested objects.
+//create new object with nested object
+let home ={
+    nameOfHome: 'Ushas',
+    ageofHome: 3,
+    ownerDetails: {
+        name: 'Loganathan',
+        age: 72,
+        state: 'TN',
+        number: [6, 5]
+    }
+}
+
+//take a shallow copy
+/* nested objects will have same reference for both original and clone(copied) objects. so if we modify the value of nested object 
+will update original as well */
+let shallowCopyHome = {...home};
+shallowCopyHome.ownerDetails.state ='KL';
+console.log(shallowCopyHome); //state is KL
+console.log(home);//state is KL
+
+//take deep copy
+let deepCopyHome = JSON.parse(JSON.stringify(home)); //convert to JSON string and parse it back to new object. this will have separate reference for original and copied one.
+deepCopyHome.ownerDetails.name ='Logan A';
+console.log(deepCopyHome);//OwnerDetailsname is Logan A
+console.log(home);//OwnerDetailsname is Loganathan
+
+//Q10. What is the difference between Object.freeze() and Object.seal()?
+//Object.freeze() - will not allow to modify/add/delete the properties of an object
+let frozenUser = Object.freeze({...user});
+frozenUser.name ='test';
+frozenUser.gender ='Male';
+delete frozenUser.age;
+console.log(frozenUser);//same as user. no change
+console.log(user);
+
+//Object.seal() - will allow user to modify the value of a key but will not allow to add/delete any property.
+let sealedUser =Object.seal({...user});
+sealedUser.name='test';//updated
+sealedUser.gender ='Male';
+delete sealedUser.age;
+console.log(sealedUser);//name is changed to test from employeeOne. rest all same
+console.log(user);//name is employeeOne
+
+//Q11. How does the spread operator (...) work with objects?
+/* spread oerator is used to copy/merge the object.
+copy object- refer the above 2 questions. will have example for merge*/
+let userThree = {...user,...userOne};
+console.log(userThree);
+//age and salary value is overwritten with UserOne Object as both object has same properties.
+
+//Q12. What is optional chaining (?.) and why is it useful?
+/* optional chaining is to avoid crashing. it gives undefined instead of type error when object does not exist */
+let p1 = null;
+//console.log(p1.name)//type error. cannot read property 'name' of null
+//console.log(p1?.name)//undefined
+
+//Q13. Explain object shorthand syntax with an example.
+//it uses when variable and key name are same.
+let fName ='test';
+let lName ='one';
+let id = 2;
+let staff = {fName,lName,id};
+console.log(staff);
+
+//Q14. What are computed property names in objects? Give an example.
+
+//Q15. What is the difference between hasOwnProperty() and the in operator?
+//in operator to check if key is exist in object
+
+
