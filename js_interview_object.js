@@ -92,6 +92,9 @@ let copyUser = {...user};
 copyUser.age =67;
 console.log(copyUser);
 console.log(user);
+
+
+
 //above shallowcopy works fine for objects does not have any nested objects.
 //create new object with nested object
 let home ={
@@ -128,13 +131,17 @@ delete frozenUser.age;
 console.log(frozenUser);//same as user. no change
 console.log(user);
 
-//Object.seal() - will allow user to modify the value of a key but will not allow to add/delete any property.
+//Object.seal() - will allow user to modify the property but will not allow to add/delete.
 let sealedUser =Object.seal({...user});
 sealedUser.name='test';//updated
 sealedUser.gender ='Male';
 delete sealedUser.age;
 console.log(sealedUser);//name is changed to test from employeeOne. rest all same
 console.log(user);//name is employeeOne
+
+//Object.assign() - used to copy the object (works as shallowCopy)
+let copiedUser = Object.assign({},user);
+console.log(copiedUser);
 
 //Q11. How does the spread operator (...) work with objects?
 /* spread oerator is used to copy/merge the object.
@@ -158,8 +165,27 @@ let staff = {fName,lName,id};
 console.log(staff);
 
 //Q14. What are computed property names in objects? Give an example.
+//it handles dynamic keys inside object literals with []
+let key = 'score';
+let prop ='city';
+let staff1 = {
+    name: 'staffOne',
+    age: 67,
+    [key]: 88,
+    [prop]: 'NJ'
+}
+console.log(staff1);
 
 //Q15. What is the difference between hasOwnProperty() and the in operator?
-//in operator to check if key is exist in object
+//in checks both own and inherited property
+//hasOwnproperty checks only own property(direct)
+const obj = { x: 10 , y: 20};
+
+console.log("x" in obj); //true
+console.log(obj.hasOwnProperty("x")); //true
+
+console.log("toString" in obj); //true
+console.log(obj.hasOwnProperty("toString")); //false
+
 
 

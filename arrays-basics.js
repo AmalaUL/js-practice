@@ -76,3 +76,25 @@ console.log(total);
 let sum= arrayFive.reduce((total,num)=> total+num,0);
 console.log(sum);
 
+//Array from
+//sytax Array.from(set, map(fn), this arg)
+const set = new Set([1, 2, 3, 4]);
+const result = Array.from(set);
+console.log(result);//[1,2,3,4]
+
+const set1 = new Set(['a', 'b', 'c']);
+const results = Array.from(set1, x => x.toUpperCase());
+console.log(results);//['A','B','C']//converting set to array by applying uppercase method
+
+const set2 = new Set('hello');
+const resultss = Array.from(set2);
+console.log(resultss);['h','e','l','l','o']//converting string to array
+
+//Array of
+const arr = Array.of(5, 10, 15);
+console.log(arr);//[5,10,15]
+
+console.log(Array.of()); //[]
+console.log(Array.of(7)); //[7]
+
+
